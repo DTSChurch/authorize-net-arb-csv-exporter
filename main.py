@@ -37,14 +37,11 @@ def get_list_of_subscriptions() -> List[SubscriptionExportDetails]:
 
     merchantAuth = get_merchant_auth()
 
-    # set sorting parameters
     sorting = apicontractsv1.ARBGetSubscriptionListSorting()
     sorting.orderBy = apicontractsv1.ARBGetSubscriptionListOrderFieldEnum.id
     sorting.orderDescending = True
 
-    # set paging and offset parameters
     paging = apicontractsv1.Paging()
-    # Paging limit can be up to 1000 for this request
     paging.limit = 20
     paging.offset = 1
 
@@ -96,7 +93,7 @@ def get_list_of_subscriptions() -> List[SubscriptionExportDetails]:
                         ),
                     )
                     results.append(subscription_export)
-                    print(f"Found: {subscription_export}" % subscription.id)
+                    print(f"Found: {subscription_export}")
                     print()
             else:
                 if response.messages is not None:
@@ -118,6 +115,7 @@ if __name__ == "__main__":
     export_file_name = (
         f"exports/subscriptions-{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.csv"
     )
+
     # export CSV of subscription exports
     csv_headers = [
         "SubscriptionId",
@@ -128,7 +126,7 @@ if __name__ == "__main__":
         "SubscriptionStatus",
         "CustomerProfileId",
         "CustomerPaymentProfileId",
-        "GatewayPersonIdentifier"
+        "GatewayPersonIdentifier",
     ]
 
     subscriptions = get_list_of_subscriptions()
@@ -148,7 +146,7 @@ if __name__ == "__main__":
                     subscription.subscription_status,
                     subscription.customer_profile_id,
                     subscription.customer_payment_profile_id,
-                    f"{subscription.customer_profile_id}|{subscription.customer_payment_profile_id}"
+                    f"{subscription.customer_profile_id}|{subscription.customer_payment_profile_id}",
                 ]
             )
 

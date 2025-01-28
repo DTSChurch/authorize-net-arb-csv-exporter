@@ -6,7 +6,7 @@ This project is a tool for exporting subscription details from Authorize.Net's A
 
 Before using this tool, ensure you have the following installed:
 
-1. **Python** (>= 3.10)
+1. **Python** (>= 3.11.6)
 2. **pipenv**
 
 ## Setup Instructions
